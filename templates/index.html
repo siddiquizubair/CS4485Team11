@@ -6,40 +6,42 @@
   <body>
     <h2><a href="https://elearning.utdallas.edu">eLearning!</a></h2>
     <h1>Algo-Bot</h1>
-    <h3>An interactive chatbot to answer (hopefully) all your questions!</h3>
     <div>
       <div id="chatbox">
-        <p class="botText"><span>Hi! I'm Chatterbot.</span></p>
+        <p class="botText"><span>Hey, I'm Algo-Bot. Ask me any questions about algorithms!</span></p>
       </div>
       <div id="userInput">
-        <input id="textInput" type="text" name="msg" placeholder="Message">
-        <input id="buttonInput" type="submit" value="Send">
+        <input id="textInput" type="text" name="msg">
+        <input id="buttonInput" type="submit" value="🔎">
       </div>
       <script>
-        function getBotResponse() {
-          var rawText = $("#textInput").val();
-          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+        function getResponse() {
+          var userMsg = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + userMsg + '</span></p>';
+
           $("#textInput").val("");
           $("#chatbox").append(userHtml);
+
           document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-          $.get("/get", { msg: rawText }).done(function(data) {
-            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+
+          $.get("/get", { msg: userMsg }).done(function(rsp) {
+            var botHtml = '<p class="botText"><span>' + rsp + '</span></p>';
             $("#chatbox").append(botHtml);
             document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
           });
         }
 
-        $("#textInput").keypress(function(e) {
-            if ((e.which == 13) && document.getElementById("textInput").value != "" ){
-                getBotResponse();
-            }
-        });
-
         $("#buttonInput").click(function() {
             if (document.getElementById("textInput").value != "") {
-                getBotResponse();
+                getResponse();
             }
         })
+
+        $("#textInput").keypress(function(k) {
+            if ((k.which == 13) && document.getElementById("textInput").value != "" ){
+                getResponse();
+            }
+        });
       </script>
     </div>
   </body>

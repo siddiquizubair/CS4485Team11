@@ -10,12 +10,19 @@ algo_bot = ChatBot(
     logic_adapters = [
         'chatterbot.logic.MathematicalEvaluation',
         {
+            'import_path': 'AlgorithmEvaluation.AlgorithmLogic',
+        },
+        {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'I\'m sorry, but I don\'t understand your question. Please refer to your course on eLearning or contact Professor Chida.',
-            'maximum_similarity_threshold': 0.60
+            'maximum_similarity_threshold': 0.0
         }
+    ],
+    preprocessors = [
+        'chatterbot.preprocessors.clean_whitespace'
     ]
 )
+
 trainer = ChatterBotCorpusTrainer(algo_bot)
 trainer.train(
     "chatterbot.corpus.english.greetings",
@@ -23,11 +30,11 @@ trainer.train(
 )
 
 @app.route("/")
-def home():
+def chatPage():
     return render_template("index.html")
 
 @app.route("/get")
-def get_bot_response():
+def get_response():
     userText = request.args.get('msg')
     return str(algo_bot.get_response(userText))
 
