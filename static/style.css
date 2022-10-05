@@ -1,0 +1,36 @@
+body {
+    font-family: helvetica;
+    display: flex ;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatbox {
+    width: 300px;
+    border: solid 1px #EEE;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.texts {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.text {
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.bot {
+    align-items: flex-start;
+}
+
+.user {
+    align-items: flex-end;
+}
