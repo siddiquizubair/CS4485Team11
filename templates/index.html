@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     <h2><a href="https://elearning.utdallas.edu">eLearning!</a></h2>
     <h1>Algo-Bot</h1>
-    <div>
+    <div id="conversation">
       <div id="chatbox">
-        <p class="botText"><span>Hey, I'm Algo-Bot. Ask me any questions about algorithms!</span></p>
+        <div class="bot texts"><div class="text">Hey, I'm Algo-Bot. Ask me any questions about algorithms!</div></div>
       </div>
       <div id="userInput">
-        <input id="textInput" type="text" name="msg">
+        <input id="textInput" type="text" size="50" name="msg">
         <input id="buttonInput" type="submit" value="🔎">
       </div>
       <script>
         function getResponse() {
           var userMsg = $("#textInput").val();
-          var userHtml = '<p class="userText"><span>' + userMsg + '</span></p>';
+          var userHtml = '<div class="user texts"><div class="text">' + userMsg + '</div></div>';
 
           $("#textInput").val("");
           $("#chatbox").append(userHtml);
@@ -25,7 +26,7 @@
           document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
 
           $.get("/get", { msg: userMsg }).done(function(rsp) {
-            var botHtml = '<p class="botText"><span>' + rsp + '</span></p>';
+            var botHtml = '<div class="bot texts"><div class="text">' + rsp + '</div></div>';
             $("#chatbox").append(botHtml);
             document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
           });
