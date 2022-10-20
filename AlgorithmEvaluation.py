@@ -45,24 +45,12 @@ class AlgorithmLogic(LogicAdapter):
         response = Statement(text = input_text)
         response.confidence = 0
 
-        if "sort" in input_text:
-            if "bubble" in input_text:
-                response = Statement(text = self.getRuntime(bubbleSort))
-                response.confidence = 1
-            if "quick" in input_text:
-                response = Statement(text = self.getRuntime(quickSort))
-                response.confidence = 1
-
-
-        if "search" in input_text:
-            if "binary" in input_text:
-                response = Statement(text = self.getRuntime(binarySearch))
-                response.confidence = 1
-
-        bigO = re.findall("big o", input_text)
+        bigO = re.findall("big o|big O|Big O|Big o", input_text)
+        
         runtime = re.findall("runtime", input_text)
 
-        if len(bigO) != 0 or len(runtime) != 0:
+        if len(bigO) != 0:
+            print("checking big o")
             regex = "[a-zA-Z]\^[0-9]|[a-zA-Z]*log[a-zA-Z]|[0-9]+|[+/*-]"
             exp = re.findall(regex, input_text)
             parsed = ' '.join(exp)
@@ -70,20 +58,42 @@ class AlgorithmLogic(LogicAdapter):
             response = Statement(text = self.checkBigO(factors))
             if len(factors) != 0:
                 response.confidence = 1
+        elif len(runtime) != 0:
+            print("checking runtime")
+            response = Statement(text = self.checkSorts(input_text))
+            if response is not None:
+                response.confidence = 1
 
         return response
 
+    def checkSorts(self, algo):
+        if "sort" in algo:
+            if "bubble" in algo:
+                print("bubble")
+                return self.getRuntime(bubbleSort)
+            if "quick" in algo:
+                return self.getRuntime(quickSort)
+
+
+        if "search" in algo:
+            if "binary" in algo:
+                print("binary")
+                return self.getRuntime(binarySearch)
+
     def checkBigO(self, expression):
         ntime = "1"
+        runtime = "1"
 
         for exp in expression:
             if "^" in exp:
                 ntime = exp
+                runtime = "N" + exp[-2:]
                 break
             elif "log" in exp:
                 ntime = exp
+                runtime = "logN"
 
-        return "The Big O runtime for this expression is O(N" + exp[-2:] + ")."
+        return "The Big O runtime for this expression is O(" + runtime + ")."
 
     def getRuntime(self, algo):
         return "The best case runtime is " + algo["best"] + ", the average case runtime is " + algo["average"] + ", and the worst case runtime is " + algo["worst"]
