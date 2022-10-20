@@ -26,11 +26,13 @@ algo_bot = ChatBot(
 trainer = ChatterBotCorpusTrainer(algo_bot)
 listTrainer = ListTrainer(algo_bot)
 trainer.train(
+    
     "chatterbot.corpus.english.greetings",
     "chatterbot.corpus.english.conversations"
 )
 
 listTrainer.train([
+    
     "I have a question about algorithms",
     "I'm happy to help with any questions you might ask."
     "I have some questions about runtime",
@@ -38,11 +40,13 @@ listTrainer.train([
 ])
 
 listTrainer.train([
+    
     "I need help with my homework",
     "I can help you through it!"
 ])
 
 listTrainer.train([
+    
     "I need help",
     "I can try to help (with algorithms)."
 ])
