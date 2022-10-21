@@ -94,18 +94,18 @@ class AlgorithmLogic(LogicAdapter):
 
     def checkSorts(self, algo):
         if "sort" in algo:
-            if "bubble" in algo:
-                print("bubble")
+            if "bubble" in algo or "Bubble" in algo:
                 return self.getRuntime(bubbleSort)
-            if "quick" in algo:
+            if "quick" in algo or "Quick" in algo:
                 return self.getRuntime(quickSort)
-            if "selection" in algo:
+            if "selection" in algo or "Selection" in algo:
                 return self.getRuntime(selectionSort)
-
+            if "insertion" in algo or "Insertion" in algo:
+                return self.getRuntime(insertSort)
 
         if "search" in algo:
-            if "binary" in algo:
-                print("binary")
+            if "binary" in algo or "Binary" in algo:
+                print("binary") 
                 return self.getRuntime(binarySearch)
 
     def checkBigO(self, expression):
