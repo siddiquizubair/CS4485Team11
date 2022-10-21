@@ -1,5 +1,5 @@
 body {
-    font-family: helvetica;
+    font-family: 'Times New Roman', Times, serif;
     display: flex ;
     flex-direction: column;
     align-items: center;
@@ -18,6 +18,11 @@ body {
     display: flex;
     flex-direction: column;
   }
+
+.sashi{
+    padding-left: .75em;
+    color: hotpink;
+}
 
 .text {
     border-radius: 20px;
