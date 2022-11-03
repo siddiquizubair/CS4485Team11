@@ -72,6 +72,18 @@ listTrainer.train([
     "Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from <br>the array and partitioning the other elements into two sub-arrays, according to whether they<br> are less than or greater than the pivot. For this reason, it is sometimes called partition-exchange sort.<br>The sub-arrays are then sorted recursively."
 ])
 
+listTrainer.train([
+    "I am struggling with algorithms",
+    "I can help with various algorithms and calculating their runtimes."
+])
+
+listTrainer.train([
+    "Merge sort"
+    "You would like help with Merge sort, correct?"
+    "I would"
+    "The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm. In this algorithm, the array is initially divided into two equal halves and then they are combined in a sorted manner."
+])
+
 @app.route("/")
 def chatPage():
     return render_template("index.html")
