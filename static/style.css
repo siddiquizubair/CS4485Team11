@@ -46,3 +46,13 @@ body {
     background: #eee;
     border-bottom-left-radius: 10px;
 }
+
+.darkheader {
+    float: right;
+    color: white;
+  }
+
+.lightheader {
+    float: right;
+    color: white;
+}
