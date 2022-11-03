@@ -5,8 +5,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
+    <div class="darkheader">
+      <input id="darkmode" type="submit" value="🌑">
+    </div>
+    <div class="lightheader">
+      <input id="lightmode" type="submit" value="☀️">
+    </div>
+    <div class="botpart">
     <h2><a href="https://elearning.utdallas.edu">eLearning!</a></h2>
-    <h1>Algo-Bot</h1>
+    <h1 class="title">Algo-Bot</h1>
     <div id="conversation">
       <div id="chatbox">
         <div class="bot texts"><div class="text">Hey, I'm Algo-Bot. Ask me any questions about algorithms!</div></div>
@@ -14,8 +21,14 @@
       <div id="userInput">
         <input id="textInput" type="text" size="50" name="msg">
         <input id="buttonInput" type="submit" value="🔎">
+        <div class="dropdown">
+          <button class="dropbtn">🔽</button>
+          <div class="dropdown-content">
+          </div>
+        </div>
       </div>
       <script>
+        var darkmode = false;
         function getResponse() {
           var userMsg = $("#textInput").val();
           var userHtml = '<div class="user texts"><div class="text">' + userMsg + '</div></div>';
@@ -26,7 +39,12 @@
           document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
 
           $.get("/get", { msg: userMsg }).done(function(rsp) {
-            var botHtml = '<div class="bot texts"><div class="text">' + rsp + '</div></div>';
+            var botHtml = '';
+            if (darkmode === true) {
+              botHtml = '<div class="bot texts"><div class="text" style="background: rgb(64, 64, 64); color: white;">' + rsp + '</div></div>';
+            } else {
+              botHtml = '<div class="bot texts"><div class="text">' + rsp + '</div></div>';
+            }
             $("#chatbox").append(botHtml);
             document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
           });
@@ -38,6 +56,22 @@
             }
         })
 
+        $("#darkmode").click(function() {
+            darkmode = true;
+            $("h1").css("color", "white");
+            $("body").css("background", "#1C1C1E");
+            $(".bot > .text").css("background", "#404040");
+            $(".bot > .text").css("color", "white");
+        })
+
+        $("#lightmode").click(function() {
+            darkmode = false;
+            $("h1").css("color", "black");
+            $("body").css("background", "white");
+            $(".bot > .text").css("background", "#eee");
+            $(".bot > .text").css("color", "black");
+        })
+
         $("#textInput").keypress(function(k) {
             if ((k.which == 13) && document.getElementById("textInput").value != "" ){
                 getResponse();
@@ -45,5 +79,6 @@
         });
       </script>
     </div>
+  </div>
   </body>
 </html>
