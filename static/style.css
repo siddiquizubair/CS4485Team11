@@ -78,3 +78,13 @@
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.darkheader {
+    float: right;
+    color: white;
+  }
+
+.lightheader {
+    float: right;
+    color: white;
+}
