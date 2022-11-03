@@ -8,7 +8,6 @@ algo_bot = ChatBot(
     "Algo-Bot", 
     storage_adapter="chatterbot.storage.SQLStorageAdapter",
     logic_adapters = [
-        'chatterbot.logic.MathematicalEvaluation',
         {
             'import_path': 'AlgorithmEvaluation.AlgorithmLogic',
         },

@@ -59,10 +59,10 @@ class AlgorithmLogic(LogicAdapter):
 
         if len(bigO) != 0:
             print("checking big o")
-            regex = "[a-zA-Z]\^[0-9]|[a-zA-Z]*log[a-zA-Z]|[0-9]+|[+/*-]"
+            regex = "[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+|[+/*-]"
             exp = re.findall(regex, input_text)
             parsed = ' '.join(exp)
-            factors = re.findall("[a-zA-Z]\^[0-9]|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed)
+            factors = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed)
             response = Statement(text = self.checkBigO(factors))
             if len(factors) != 0:
                 response.confidence = 1
@@ -89,6 +89,77 @@ class AlgorithmLogic(LogicAdapter):
                 if "binary" in input_text or "Binary" in input_text:
                     response = Statement(text = binarySearch["expl"])
                     response.confidence = 1
+        elif ">=" in input_text or "==" in input_text or "<=" in input_text:
+            regex = "[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+|[+/*-]"
+            if ">=" in input_text:
+                i = input_text.index(">")
+                exp1 = input_text[:i]
+                exp2 = input_text[i+2:]
+
+                one = re.findall(regex, exp1)
+                two = re.findall(regex, exp2)
+                parsed1 = ' '.join(one)
+                parsed2 = ' '.join(two)
+                f1 = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed1)
+                f2 = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed2)
+                res = self.compareBigO(f1, f2)
+                run1 = self.checkRuntime(f1)
+                run2 = self.checkRuntime(f2)
+                if ">=" == res:
+                    response = Statement(text = "True, the running time for function 1 is " + run1 + " which grows at a faster rate than function 2's running time, " + run2)
+                    response.confidence = 1
+                elif "==" == res:
+                    response = Statement(text = "False, the running time for function 1 is " + run1 + " which grows at the same rate as function 2's running time, " + run2)
+                    response.confidence = 1
+                elif "<=" == res:
+                    response = Statement(text = "False, the running time for function 1 is " + run1 + " which does not grow faster than the running time for function 2, " + run2)
+                    response.confidence = 1
+            elif "==" in input_text:
+                i = input_text.index("=")
+                exp1 = input_text[:i]
+                exp2 = input_text[i+2:]
+
+                one = re.findall(regex, exp1)
+                two = re.findall(regex, exp2)
+                parsed1 = ' '.join(one)
+                parsed2 = ' '.join(two)
+                f1 = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed1)
+                f2 = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed2)
+                res = self.compareBigO(f1, f2)
+                run1 = self.checkRuntime(f1)
+                run2 = self.checkRuntime(f2)
+                if ">=" == res:
+                    response = Statement(text = "False, the running time for function 1 is " + run1 + " which does not grow at the same rate as function 2's running time, " + run2)
+                    response.confidence = 1
+                elif "==" == res:
+                    response = Statement(text = "True, the running time for function 1 is " + run1 + " which grows at the same rate as function 2's running time, " + run2)
+                    response.confidence = 1
+                elif "<=" == res:
+                    response = Statement(text = "False, the running time for function 1 is " + run1 + " which does not grow at the same rate as function 2's running time, " + run2)
+                    response.confidence = 1
+            elif "<=" in input_text:
+                i = input_text.index("<")
+                exp1 = input_text[:i]
+                exp2 = input_text[i+2:]
+
+                one = re.findall(regex, exp1)
+                two = re.findall(regex, exp2)
+                parsed1 = ' '.join(one)
+                parsed2 = ' '.join(two)
+                f1 = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed1)
+                f2 = re.findall("[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+", parsed2)
+                res = self.compareBigO(f1, f2)
+                run1 = self.checkRuntime(f1)
+                run2 = self.checkRuntime(f2)
+                if ">=" == res:
+                    response = Statement(text = "False, the running time for function 1 is " + run1 + " which does not grow at a faster rate than function 2's running time, " + run2)
+                    response.confidence = 1
+                elif "==" == res:
+                    response = Statement(text = "False, the running time for function 1 is " + run1 + " which is not equal to the running time for function 2, " + run2) 
+                    response.confidence = 1
+                elif "<=" == res:
+                    response = Statement(text = "True, the running time for function 1 is " + run1 + " which grows at a slower rate than function 2's running time, " + run2)
+                    response.confidence = 1
 
         return response
 
@@ -109,19 +180,169 @@ class AlgorithmLogic(LogicAdapter):
                 return self.getRuntime(binarySearch)
 
     def checkBigO(self, expression):
-        ntime = "1"
         runtime = "1"
+        curr = "1"
+        fast = "1"
+        print(expression)
 
         for exp in expression:
-            if "^" in exp:
-                ntime = exp
-                runtime = "N" + exp[-2:]
-                break
+            if "!" in exp:
+                fast = "!"
+                curr = self.checkFaster(fast, curr)
+                if curr == fast:
+                    runtime = "N!"
+            elif "^" in exp:
+                i = exp.index("^")
+                if exp[i+1:].isalpha():
+                    fast = "^N"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = exp[:i + 1] + "N"
+                else:
+                    fast = "^X"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "N^" + exp[i + 1:]
             elif "log" in exp:
-                ntime = exp
-                runtime = "logN"
+                i = exp.index("log")
+                if i == 0:
+                    fast = "logn"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "log N"
+                else:
+                    fast = "nlogn"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "N log N"
 
         return "The Big O runtime for this expression is O(" + runtime + ")."
+
+    def checkFaster(self, fast, curr):
+        print(fast + " " + curr)
+        if fast == "!":
+            return fast
+        elif fast == "^N":
+            if curr == "!":
+                return curr
+            else:
+                return fast
+        elif fast == "^X":
+            if curr == "!" or curr == "^N":
+                return curr
+            else:
+                return fast
+        elif fast == "nlogn":
+            if curr == "!" or curr == "^N" or curr == "^X":
+                return curr
+            else:
+                return fast
+        elif fast == "n":
+            if curr == "!" or curr == "^N" or curr == "^X" or curr == "nlogn":
+                return curr
+            else:
+                return fast
+        elif fast == "logn":
+            if curr == "!" or curr == "^N" or curr == "^X" or curr == "nlogn":
+                return curr
+            else:
+                return fast
+        else:
+            return "1"
+
+    def compareBigO(self, f1, f2):
+        one = self.getBigO(f1)
+        two = self.getBigO(f2)
+        res = self.checkFaster(one, two)
+        equality = ""
+
+        if res == one and res == two:
+            equality = "=="
+        elif res == one:
+            equality = ">="
+        else:
+            equality = "<="
+
+        return equality
+
+
+    def getBigO(self, expression):
+        runtime = "1"
+        curr = "1"
+        fast = "1"
+        print(expression)
+
+        for exp in expression:
+            if "!" in exp:
+                fast = "!"
+                curr = self.checkFaster(fast, curr)
+                if curr == fast:
+                    runtime = "!"
+            elif "^" in exp:
+                i = exp.index("^")
+                if exp[i+1:].isalpha():
+                    fast = "^N"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "^N"
+                else:
+                    fast = "^X"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "^X"
+            elif "log" in exp:
+                i = exp.index("log")
+                if i == 0:
+                    fast = "logn"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "logn"
+                else:
+                    fast = "nlogn"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "nlogn"
+        
+        return runtime
+
+    def checkRuntime(self, expression):
+        runtime = "1"
+        curr = "1"
+        fast = "1"
+        print(expression)
+
+        for exp in expression:
+            if "!" in exp:
+                fast = "!"
+                curr = self.checkFaster(fast, curr)
+                if curr == fast:
+                    runtime = "N!"
+            elif "^" in exp:
+                i = exp.index("^")
+                if exp[i+1:].isalpha():
+                    fast = "^N"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = exp[:i + 1] + "N"
+                else:
+                    fast = "^X"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "N^" + exp[i + 1:]
+            elif "log" in exp:
+                i = exp.index("log")
+                if i == 0:
+                    fast = "logn"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "log N"
+                else:
+                    fast = "nlogn"
+                    curr = self.checkFaster(fast, curr)
+                    if curr == fast:
+                        runtime = "N log N"
+
+        return "O(" + runtime + ")"
 
     def getRuntime(self, algo):
         return "The best case runtime is " + algo["best"] + ", the average case runtime is " + algo["average"] + ", and the worst case runtime is " + algo["worst"]
