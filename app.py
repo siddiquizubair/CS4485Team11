@@ -72,6 +72,20 @@ listTrainer.train([
 ])
 
 listTrainer.train([
+    "Insertion sort", 
+    "Would you like to learn more about insertion sort?",
+    "I would",
+    "Insertion sort is a simple sorting algorithm for a small number of elements, which compares the key element with previous elements. If the previous elements are greater than the key element, then you move the previous element to the next position. Start from index 1 to size of the input array."
+]) 
+
+listTrainer.train([ 
+    "Bucket sort", 
+    "Would you like to learn more about bucket sort?",
+    "I would",
+    "Bucket sort is a comparison sort algorithm that operates on elements by dividing them into different buckets and then sorting these buckets individually. Each bucket is sorted individually using a separate sorting algorithm like insertion sort, or by applying the bucket sort algorithm recursively. It is mainly useful when the input is uniformly distributed over a range."
+]) 
+
+listTrainer.train([
     "I am struggling with algorithms",
     "I can help with various algorithms and calculating their runtimes."
 ])
