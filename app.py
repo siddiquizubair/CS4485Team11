@@ -14,7 +14,7 @@ algo_bot = ChatBot(
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'I\'m sorry, but I don\'t understand your question. Please refer to your course on eLearning or contact Professor Chida.',
-            'maximum_similarity_threshold': 0.8
+            'maximum_similarity_threshold': 0.5
         }
     ],
     preprocessors = [
