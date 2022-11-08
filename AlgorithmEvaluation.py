@@ -47,6 +47,8 @@ class AlgorithmLogic(LogicAdapter):
         return response.confidence == 1
 
     def process(self, statement, additional_response_selection_parameters=None):
+        supers_n = "⁰¹²³⁴⁵⁶⁷⁸⁹"
+        supers_x = "ᵃᵇᶜᵈᵉᶠᵍʰᶦʲᵏˡᵐⁿᵒᵖ۹ʳˢᵗᵘᵛʷˣʸᶻ"
         input_text = statement.text;
         response = Statement(text = input_text)
         response.confidence = 0
@@ -76,7 +78,7 @@ class AlgorithmLogic(LogicAdapter):
                 if "bubble" in input_text or "Bubble" in input_text:
                     response = Statement(text = bubbleSort["expl"])
                     response.confidence = 1
-                elif "quick" in input_text or "Quick" in input_text:
+                elif "quick" in input_text or "Quick" in input_text: 
                     response = Statement(text = quickSort["expl"])
                     response.confidence = 1
                 elif "selection" in input_text or "Selection" in input_text:
@@ -89,12 +91,39 @@ class AlgorithmLogic(LogicAdapter):
                 if "binary" in input_text or "Binary" in input_text:
                     response = Statement(text = binarySearch["expl"])
                     response.confidence = 1
-        elif ">=" in input_text or "==" in input_text or "<=" in input_text:
+            elif "sorting" in input_text and "algorithms" in input_text:
+                response = Statement(text = "The sorting algorithms are <br>Selection Sort<br> Bubble Sort<br> Insertion Sort<br> Merge Sort<br> Quick Sort<br> Heap Sort<br> Counting Sort<br> Radix Sort<br> Bucket Sort")
+                response.confidence = 1
+            elif "office hours" in input_text or "Office hours" in input_text:
+                response = Statement(text = "The professor for this course is Professor Chida and her office hours are --")
+                response.confidence = 1
+            elif ("TA" in input_text or "ta" in input_text) and ("information" in input_text or "Information" in input_text):
+                response = Statement(text = "The TA for this course is Akshay Jha and their office hours are --")
+                response.confidence = 1
+            elif ("next" in input_text or "Next" in input_text) and "quiz" in input_text:
+                response = Statement(text = "The next quiz for algorithms is Quiz X on --/--/----. The quiz is over ---")
+                response.confidence = 1
+            elif ("next" in input_text or "Next" in input_text) and "test" in input_text:
+                response = Statement(text = "The next test is Test X on --/--/----. The test covers ---")
+                response.confidence = 1
+            elif ("dynamic" in input_text or "Dynamic" in input_text) and "programming" in input_text:
+                response = Statement(text = "Dynamic Programming (DP) is an algorithmic technique for solving an optimization problem by breaking it down into simpler subproblems and utilizing the fact that the optimal solution to the overall problem depends upon the optimal solution to its subproblems.")
+                response.confidence = 1
+        elif ">=" in input_text or "==" in input_text or "<=" in input_text or "faster" in input_text or "quickly" in input_text or "slowly" in input_text or "slower" in input_text or "same" in input_text:
             regex = "[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+|[+/*-]"
-            if ">=" in input_text:
-                i = input_text.index(">")
-                exp1 = input_text[:i]
-                exp2 = input_text[i+2:]
+            if ">=" in input_text or "faster" in input_text or "quickly" in input_text:
+                if ">=" in input_text:
+                    i = input_text.index(">")
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+2:]
+                elif "faster" in input_text:
+                    i = input_text.index("f")
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+6:]
+                elif "quickly" in input_text:
+                    i = input_text.index("q")
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+7:i]
 
                 one = re.findall(regex, exp1)
                 two = re.findall(regex, exp2)
@@ -114,10 +143,15 @@ class AlgorithmLogic(LogicAdapter):
                 elif "<=" == res:
                     response = Statement(text = "False, the running time for function 1 is " + run1 + " which does not grow faster than the running time for function 2, " + run2)
                     response.confidence = 1
-            elif "==" in input_text:
-                i = input_text.index("=")
-                exp1 = input_text[:i]
-                exp2 = input_text[i+2:]
+            elif "==" in input_text or "same" in input_text:
+                if "==" in input_text:
+                    i = input_text.index("=")
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+2:]
+                elif "same" in input_text:
+                    i = input_text.index("s")
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+4:i]
 
                 one = re.findall(regex, exp1)
                 two = re.findall(regex, exp2)
@@ -137,10 +171,15 @@ class AlgorithmLogic(LogicAdapter):
                 elif "<=" == res:
                     response = Statement(text = "False, the running time for function 1 is " + run1 + " which does not grow at the same rate as function 2's running time, " + run2)
                     response.confidence = 1
-            elif "<=" in input_text:
-                i = input_text.index("<")
-                exp1 = input_text[:i]
-                exp2 = input_text[i+2:]
+            elif "<=" in input_text or "slowly" in input_text or "slower" in input_text: 
+                if "<=" in input_text:
+                    i = input_text.index("<")
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+2:]
+                elif "slowly" in input_text or "slower" in input_text:
+                    i = input_text.index("s") #incorrect because it gets the s from does 
+                    exp1 = input_text[:i]
+                    exp2 = input_text[i+6:]
 
                 one = re.findall(regex, exp1)
                 two = re.findall(regex, exp2)
