@@ -25,11 +25,13 @@ algo_bot = ChatBot(
 trainer = ChatterBotCorpusTrainer(algo_bot)
 listTrainer = ListTrainer(algo_bot)
 trainer.train(
+    
     "chatterbot.corpus.english.greetings",
     "chatterbot.corpus.english.conversations"
 )
 
 listTrainer.train([
+    
     "I have a question about algorithms",
     "I'm happy to help with any questions you might ask."
     "I have some questions about runtime",
@@ -37,11 +39,13 @@ listTrainer.train([
 ])
 
 listTrainer.train([
+    
     "I need help with my homework",
     "I can help you through it!"
 ])
 
 listTrainer.train([
+    
     "I need help",
     "I can try to help (with algorithms)." 
 ])
@@ -65,6 +69,18 @@ listTrainer.train([
     "Would you like to learn more about quicksort?",
     "I would",
     "Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from <br>the array and partitioning the other elements into two sub-arrays, according to whether they<br> are less than or greater than the pivot. For this reason, it is sometimes called partition-exchange sort.<br>The sub-arrays are then sorted recursively."
+])
+
+listTrainer.train([
+    "I am struggling with algorithms",
+    "I can help with various algorithms and calculating their runtimes."
+])
+
+listTrainer.train([
+    "Merge sort"
+    "You would like help with Merge sort, correct?"
+    "I would"
+    "The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm. In this algorithm, the array is initially divided into two equal halves and then they are combined in a sorted manner."
 ])
 
 @app.route("/")
