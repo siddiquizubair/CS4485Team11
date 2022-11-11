@@ -21,7 +21,7 @@
       <div id="userInput">
         <input id="textInput" type="text" size="50" name="msg">
         <input id="buttonInput" type="submit" value="🔎">
-        <div class="dropdown">
+        <div class="dropdown one">
           <button class="dropbtn">🔽</button>
           <div class="dropdown-content">
             <button id="greaterthan">≥</button>
@@ -29,6 +29,52 @@
             <button id="equals">==</button>
             <button id="sigma">Σ</button>
             <button id="naturallog">ln(x)</button>
+          </div>
+        </div>
+        <div class="dropdown two">
+          <button class="dropbtn">exponents</button>
+          <div class="dropdown-content">
+            <button id="superzero">⁰</button>
+            <button id="superone">¹</button>
+            <button id="supertwo">²</button>
+            <button id="superthree">³</button>
+            <button id="superfour">⁴</button>
+            <button id="superfive">⁵</button>
+            <button id="supersix">⁶</button>
+            <button id="superseven">⁷</button>
+            <button id="supereight">⁸</button>
+            <button id="supernine">⁹</button>
+          </div>
+        </div>
+        <div class="dropdown three">
+          <button class="dropbtn">variable exponents</button>
+          <div class="dropdown-content">
+            <button id="supera">ᵃ</button>
+            <button id="superb">ᵇ</button>
+            <button id="superc">ᶜ</button>
+            <button id="superd">ᵈ</button>
+            <button id="supere">ᵉ</button>
+            <button id="superf">ᶠ</button>
+            <button id="superg">ᵍ</button>
+            <button id="superh">ʰ</button>
+            <button id="superi">ᶦ</button>
+            <button id="superj">ʲ</button>
+            <button id="superk">ᵏ</button>
+            <button id="superl">ˡ</button>
+            <button id="superm">ᵐ</button>
+            <button id="supern">ⁿ</button>
+            <button id="supero">ᵒ</button>
+            <button id="superp">ᵖ</button>
+            <button id="superq">۹</button>
+            <button id="superr">ʳ</button>
+            <button id="supers">ˢ</button>
+            <button id="supert">ᵗ</button>
+            <button id="superu">ᵘ</button>
+            <button id="superv">ᵛ</button>
+            <button id="superw">ʷ</button>
+            <button id="superx">ˣ</button>
+            <button id="supery">ʸ</button>
+            <button id="superz">ᶻ</button>
           </div>
         </div>
       </div>
@@ -82,6 +128,171 @@
                 getResponse();
             }
         });
+
+        document.getElementById("greaterthan").addEventListener("click", () => {
+            document.getElementById("textInput").value += "≥";
+        })
+
+        document.getElementById("lessthan").addEventListener("click", () => {
+            document.getElementById("textInput").value += "≤";
+        })
+
+        document.getElementById("equals").addEventListener("click", () => {
+            document.getElementById("textInput").value += "==";
+        })
+
+        document.getElementById("sigma").addEventListener("click", () => {
+            document.getElementById("textInput").value += "Σ";
+        })
+
+        document.getElementById("naturallog").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ln(x)";
+        })
+
+        document.getElementById("superzero").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁰";
+        })
+
+        document.getElementById("superone").addEventListener("click", () => {
+            document.getElementById("textInput").value += "¹";
+        })
+
+        document.getElementById("supertwo").addEventListener("click", () => {
+            document.getElementById("textInput").value += "²";
+        })
+
+        document.getElementById("superthree").addEventListener("click", () => {
+            document.getElementById("textInput").value += "³";
+        })
+
+        document.getElementById("superfour").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁴";
+        })
+
+        document.getElementById("superfive").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁵";
+        })
+
+        document.getElementById("supersix").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁶";
+        })
+
+        document.getElementById("superseven").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁷";
+        })
+
+        document.getElementById("supereight").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁸";
+        })
+
+        document.getElementById("supernine").addEventListener("click", () => {
+            document.getElementById("textInput").value += "⁹";
+        })
+
+
+        document.getElementById("supera").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵃ";
+        })
+
+        document.getElementById("superb").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵇ";
+        })
+
+        document.getElementById("superc").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᶜ";
+        })
+
+        document.getElementById("superd").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵈ";
+        })
+
+        document.getElementById("supere").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵉ";
+        })
+
+        document.getElementById("superf").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᶠ";
+        })
+
+        document.getElementById("superg").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵍ";
+        })
+
+        document.getElementById("superh").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ʰ";
+        })
+
+        document.getElementById("superi").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᶦ";
+        })
+
+        document.getElementById("superj").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ʲ";
+        })
+
+        document.getElementById("superk").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵏ";
+        })
+
+        document.getElementById("superl").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ˡ";
+        })
+
+        document.getElementById("superm").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵐ";
+        })
+
+        document.getElementById("supern").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ⁿ";
+        })
+
+        document.getElementById("supero").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵒ";
+        })
+
+        document.getElementById("superp").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵖ";
+        })
+
+        document.getElementById("superq").addEventListener("click", () => {
+            document.getElementById("textInput").value += "۹";
+        })
+
+        document.getElementById("superr").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ʳ";
+        })
+
+        document.getElementById("supers").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ˢ";
+        })
+
+        document.getElementById("supert").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵗ";
+        })
+
+        document.getElementById("superu").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵘ";
+        })
+
+        document.getElementById("superv").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᵛ";
+        })
+
+        document.getElementById("superw").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ʷ";
+        })
+
+        document.getElementById("superx").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ˣ";
+        })
+
+        document.getElementById("supery").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ʸ";
+        })
+
+        document.getElementById("superz").addEventListener("click", () => {
+            document.getElementById("textInput").value += "ᶻ";
+        })
       </script>
     </div>
   </div>
