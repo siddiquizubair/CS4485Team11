@@ -47,9 +47,51 @@ class AlgorithmLogic(LogicAdapter):
         return response.confidence == 1
 
     def process(self, statement, additional_response_selection_parameters=None):
-        supers_n = "⁰¹²³⁴⁵⁶⁷⁸⁹"
-        supers_x = "ᵃᵇᶜᵈᵉᶠᵍʰᶦʲᵏˡᵐⁿᵒᵖ۹ʳˢᵗᵘᵛʷˣʸᶻ"
+        supers_n = ["⁰","¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹"]
+        supers_x = ["ᵃ","ᵇ","ᶜ","ᵈ","ᵉ","ᶠ","ᵍ","ʰ","ᶦ","ʲ","ᵏ","ˡ","ᵐ","ⁿ","ᵒ","ᵖ","۹","ʳ","ˢ","ᵗ","ᵘ","ᵛ","ʷ","ˣ","ʸ","ᶻ"]
         input_text = statement.text;
+
+        input_text = input_text.replace(supers_n[0], "^0")
+        input_text = input_text.replace(supers_n[1], "^1")
+        input_text = input_text.replace(supers_n[2], "^2")
+        input_text = input_text.replace(supers_n[3], "^3")
+        input_text = input_text.replace(supers_n[4], "^4")
+        input_text = input_text.replace(supers_n[5], "^5")
+        input_text = input_text.replace(supers_n[6], "^6")
+        input_text = input_text.replace(supers_n[7], "^7")
+        input_text = input_text.replace(supers_n[8], "^8")
+        input_text = input_text.replace(supers_n[9], "^9")
+
+        input_text = input_text.replace(supers_x[0], "^A")
+        input_text = input_text.replace(supers_x[1], "^B")
+        input_text = input_text.replace(supers_x[2], "^C")
+        input_text = input_text.replace(supers_x[3], "^D")
+        input_text = input_text.replace(supers_x[4], "^E")
+        input_text = input_text.replace(supers_x[5], "^F")
+        input_text = input_text.replace(supers_x[6], "^G")
+        input_text = input_text.replace(supers_x[7], "^H")
+        input_text = input_text.replace(supers_x[8], "^I")
+        input_text = input_text.replace(supers_x[9], "^J")
+        input_text = input_text.replace(supers_x[10], "^K")
+        input_text = input_text.replace(supers_x[11], "^L")
+        input_text = input_text.replace(supers_x[12], "^M")
+        input_text = input_text.replace(supers_x[13], "^N")
+        input_text = input_text.replace(supers_x[14], "^O")
+        input_text = input_text.replace(supers_x[15], "^P")
+        input_text = input_text.replace(supers_x[16], "^Q")
+        input_text = input_text.replace(supers_x[17], "^R")
+        input_text = input_text.replace(supers_x[18], "^S")
+        input_text = input_text.replace(supers_x[19], "^T")
+        input_text = input_text.replace(supers_x[20], "^U")
+        input_text = input_text.replace(supers_x[21], "^V")
+        input_text = input_text.replace(supers_x[22], "^W")
+        input_text = input_text.replace(supers_x[23], "^X")
+        input_text = input_text.replace(supers_x[24], "^Y")
+        input_text = input_text.replace(supers_x[25], "^Z")
+
+        input_text = input_text.replace("≥", ">=")
+        input_text = input_text.replace("≤", "<=")
+
         response = Statement(text = input_text)
         response.confidence = 0
 
@@ -57,7 +99,7 @@ class AlgorithmLogic(LogicAdapter):
         
         runtime = re.findall("runtime", input_text)
 
-        question = re.findall("what|What|how|How|work", input_text)
+        question = re.findall("what|What|how|How|work|when|When", input_text)
 
         if len(bigO) != 0:
             print("checking big o")
@@ -107,7 +149,13 @@ class AlgorithmLogic(LogicAdapter):
                 response = Statement(text = "The next test is Test X on --/--/----. The test covers ---")
                 response.confidence = 1
             elif ("dynamic" in input_text or "Dynamic" in input_text) and "programming" in input_text:
-                response = Statement(text = "Dynamic Programming (DP) is an algorithmic technique for solving an optimization problem by breaking it down into simpler subproblems and utilizing the fact that the optimal solution to the overall problem depends upon the optimal solution to its subproblems.")
+                response = Statement(text = "Dynamic Programming (DP) is an algorithmic technique for solving an optimization problem by <br> breaking it down into simpler subproblems and utilizing the fact that the optimal solution to<br> the overall problem depends upon the optimal solution to its subproblems.")
+                response.confidence = 1
+            elif "recursion" in input_text or "Recursion" in input_text:
+                response = Statement(text = "Recursion is when a function calls itself with smaller input values and returns the result<br> for the current input by carrying out basic operations on the returned value for the smaller <br>input.")
+                response.confidence = 1
+            elif ("Greedy" in input_text or "greedy" in input_text) and ("algorithm" in input_text or "algorithms" in input_text):
+                response = Statement(text = "A greedy algorithm is an approach for solving a problem by selecting the best option<br> available at the moment. It doesn't worry whether the current best result will bring the overall<br> optimal result.")
                 response.confidence = 1
         elif ">=" in input_text or "==" in input_text or "<=" in input_text or "faster" in input_text or "quickly" in input_text or "slowly" in input_text or "slower" in input_text or "same" in input_text:
             regex = "[a-zA-Z]!|[a-zA-Z0-9]+\^[a-zA-Z0-9]+|[a-zA-Z]*log[a-zA-Z]|[0-9]+|[+/*-]"
