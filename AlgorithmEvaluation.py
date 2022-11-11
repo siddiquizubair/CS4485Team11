@@ -171,7 +171,7 @@ class AlgorithmLogic(LogicAdapter):
                 elif "quickly" in input_text:
                     i = input_text.index("q")
                     exp1 = input_text[:i]
-                    exp2 = input_text[i+7:i]
+                    exp2 = input_text[i+7:]
 
                 one = re.findall(regex, exp1)
                 two = re.findall(regex, exp2)
