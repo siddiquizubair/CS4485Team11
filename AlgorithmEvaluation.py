@@ -270,7 +270,6 @@ class AlgorithmLogic(LogicAdapter):
         runtime = "1"
         curr = "1"
         fast = "1"
-        print(expression)
 
         for exp in expression:
             if "!" in exp:
@@ -306,7 +305,6 @@ class AlgorithmLogic(LogicAdapter):
         return "The Big O runtime for this expression is O(" + runtime + ")."
 
     def checkFaster(self, fast, curr):
-        print(fast + " " + curr)
         if fast == "!":
             return fast
         elif fast == "^N":
@@ -314,8 +312,20 @@ class AlgorithmLogic(LogicAdapter):
                 return curr
             else:
                 return fast
-        elif fast == "^X":
+        elif "^" in fast:
             if curr == "!" or curr == "^N":
+                return curr
+            elif len(fast) >= 2 and len(curr) >= 2:
+                if int(curr[1:]) > int(fast[1:]):
+                    return curr
+                else:
+                    return fast
+            else:
+                return fast
+        elif fast.isdigit():
+            if curr == "!" or curr == "^N":
+                return curr
+            elif int(curr) > int(fast):
                 return curr
             else:
                 return fast
@@ -341,6 +351,8 @@ class AlgorithmLogic(LogicAdapter):
         one = self.getBigO(f1)
         two = self.getBigO(f2)
         res = self.checkFaster(one, two)
+        print(one + " " + two)
+        print(res)
         equality = ""
 
         if res == one and res == two:
@@ -357,7 +369,6 @@ class AlgorithmLogic(LogicAdapter):
         runtime = "1"
         curr = "1"
         fast = "1"
-        print(expression)
 
         for exp in expression:
             if "!" in exp:
@@ -369,14 +380,16 @@ class AlgorithmLogic(LogicAdapter):
                 i = exp.index("^")
                 if exp[i+1:].isalpha():
                     fast = "^N"
-                    curr = self.checkFaster(fast, curr)
-                    if curr == fast:
-                        runtime = "^N"
+                    fast2 = exp[:i]
+                    curr = self.checkFaster(fast2, curr)
+                    if curr == fast2:
+                        runtime = fast2
                 else:
                     fast = "^X"
-                    curr = self.checkFaster(fast, curr)
-                    if curr == fast:
-                        runtime = "^X"
+                    fast2 = exp[i:]
+                    curr = self.checkFaster(fast2, curr)
+                    if curr == fast2:
+                        runtime = fast2
             elif "log" in exp:
                 i = exp.index("log")
                 if i == 0:
@@ -396,7 +409,6 @@ class AlgorithmLogic(LogicAdapter):
         runtime = "1"
         curr = "1"
         fast = "1"
-        print(expression)
 
         for exp in expression:
             if "!" in exp:
