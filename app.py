@@ -26,7 +26,7 @@ algo_bot = ChatBot(
 trainer = ChatterBotCorpusTrainer(algo_bot)
 trainer.train(
     "chatterbot.corpus.english.greetings",
-    "chatterbot.corpus.english.conversations"
+    "chatterbot.corpus.english.conversations" 
 )
 
 @app.route("/")
