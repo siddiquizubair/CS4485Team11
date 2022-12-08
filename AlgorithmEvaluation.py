@@ -246,7 +246,7 @@ class AlgorithmLogic(LogicAdapter):
                     response.confidence = 1
                 elif "<=" == res:
                     response = Statement(text = "True, the running time for function 1 is " + run1 + " which grows at a slower rate than function 2's running time, " + run2)
-                    response.confidence = 1
+                    response.confidence = 1  
 
         return response
 
