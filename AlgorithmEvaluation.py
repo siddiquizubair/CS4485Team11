@@ -3,6 +3,8 @@ from chatterbot.logic import LogicAdapter
 from chatterbot.conversation import Statement
 import re
 
+
+#defining different algorithms run times with explanations 
 binarySearch = {
     "best": "O(1)",
     "average": "O(log n)",
